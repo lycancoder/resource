@@ -24,11 +24,11 @@
 <script src="./timers.js" type="text/javascript" charset="utf-8"></script>
 <script>
     createTimer(0, function (sec, showTime) {
-    	document.getElementById('demo').innerHTML = showTime;
+        document.getElementById('demo').innerHTML = showTime;
         console.log(sec, showTime);
-	    if (sec == 600) {
-		    clearTimer();
-	    }
+        if (sec == 600) {
+            clearTimer();
+        }
     });
 </script>
 </html>
