@@ -4,26 +4,30 @@
 // 现在主流的浏览器都支持该消息了，
 // 例如Chrome, Firefox, IE10等
 window.onload = function () {
-	var hiddenProperty;
-	if ('hidden' in document) {
-		hiddenProperty = 'hidden';
-	} else if ('webkitHidden' in document) {
-		hiddenProperty = 'webkitHidden';
-	} else if ('mozHidden' in document) {
-		hiddenProperty = 'mozHidden';
-	} else {
-		hiddenProperty = null;
-	}
+    var hiddenProperty;
+    if ('hidden' in document) {
+        hiddenProperty = 'hidden';
+    } else if ('webkitHidden' in document) {
+        hiddenProperty = 'webkitHidden';
+    } else if ('mozHidden' in document) {
+        hiddenProperty = 'mozHidden';
+    } else {
+        hiddenProperty = null;
+    }
 
-	var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
 
-	document.addEventListener(visibilityChangeEvent, function () {
-		if (!document[hiddenProperty]) {
-			console.log('当前窗口已切换至前台，已激活');
-			// self.location.reload();
-		} else {
-			console.log('当前窗口已切换至后台，未激活');
-			// self.location.reload();
-		}
-	});
+    document.addEventListener(visibilityChangeEvent, function () {
+        if (!document[hiddenProperty]) {
+            console.log('当前窗口已切换至前台，已激活');
+            if (typeof handleFrontDeskShow == 'function') {
+                handleFrontDeskShow();
+            }
+        } else {
+            console.log('当前窗口已切换至后台，未激活');
+            if (typeof handleBackstageHide == 'function') {
+                handleBackstageHide();
+            }
+        }
+    });
 };
